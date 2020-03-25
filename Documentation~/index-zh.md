@@ -231,7 +231,7 @@ UIWidgets支持渲染文本中包含的表情。
 如果您希望切换到Google版本的表情，请按如下步骤操作：
 
 1. 拷贝`Runtime/Resources/backup~/EmojiGoogle.png`到`Runtime/Resources/images`目录。
-2. 在**Project**面板中，找到`EmojiGoogle`资源，在**Inspector**面板中，将**Max Size**更改为4096，并取消**Generate Mipmaps**选项前的对勾。
+2. 在**Project**面板中，找到`EmojiGoogle`资源，在**Inspector**面板中，将**Max Size**更改为4096，取消选中**Generate Mipmaps**，并选中**Alpha Is Transparency**。
 3. 在您的代码中继承`UIWidgetsPanel`的类的`OnEnable()`函数中，添加如下代码
 
 ```csharp
@@ -261,7 +261,6 @@ EmojiUtils.configuration = new EmojiResourceConfiguration(
 </p>
 
 我们提供了一个包装好的`UnityObjectDetector`组件以及`onRelease`回调函数，借此您可以实现简单地将物体（例如Hierarchy内的场景物体、Project窗口下的文件等）拖拽至区域内，来获得`UnityEngine.Object[] `类型的引用并进行操作。
-
 
 ## 调试UIWidgets应用程序
 
@@ -312,4 +311,4 @@ UIWidgets Inspector工具用于可视化和浏览窗口小部件树。 你可以
 | 有推荐的适用于UIWidgets的IDE吗？ | Rider, VSCode(Open .sln) |
 
 ## 如何贡献
-请查看[CONTRIBUTING.md](CONTRIBUTING.md)
+请查看[CONTRIBUTING](CONTRIBUTING)

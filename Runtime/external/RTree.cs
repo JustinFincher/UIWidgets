@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.UIWidgets.ui;
 
-namespace Unity.UIWidgets.external
+namespace Unity.UIWidgets.Runtime.external
 {
     public interface ISpatialData
     {

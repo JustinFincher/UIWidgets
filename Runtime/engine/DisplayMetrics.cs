@@ -164,19 +164,20 @@ namespace Unity.UIWidgets.engine {
 
 #if UNITY_ANDROID
         static float AndroidDevicePixelRatio() {
-            using (
-                AndroidJavaClass unityPlayerClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer")
-            ) {
-                using (
-                    AndroidJavaObject metricsInstance = new AndroidJavaObject("android.util.DisplayMetrics"),
-                    activityInstance = unityPlayerClass.GetStatic<AndroidJavaObject>("currentActivity"),
-                    windowManagerInstance = activityInstance.Call<AndroidJavaObject>("getWindowManager"),
-                    displayInstance = windowManagerInstance.Call<AndroidJavaObject>("getDefaultDisplay")
-                ) {
-                    displayInstance.Call("getMetrics", metricsInstance);
-                    return metricsInstance.Get<float>("density");
-                }
-            }
+            // using (
+            //     AndroidJavaClass unityPlayerClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer")
+            // ) {
+            //     using (
+            //         AndroidJavaObject metricsInstance = new AndroidJavaObject("android.util.DisplayMetrics"),
+            //         activityInstance = unityPlayerClass.GetStatic<AndroidJavaObject>("currentActivity"),
+            //         windowManagerInstance = activityInstance.Call<AndroidJavaObject>("getWindowManager"),
+            //         displayInstance = windowManagerInstance.Call<AndroidJavaObject>("getDefaultDisplay")
+            //     ) {
+            //         displayInstance.Call("getMetrics", metricsInstance);
+            //         return metricsInstance.Get<float>("density");
+            //     }
+            // }
+            return 2.0f;
         }
 #endif
 

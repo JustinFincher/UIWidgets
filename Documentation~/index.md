@@ -266,7 +266,7 @@ We also prepared the resources of [Google Emoji](https://emojipedia.org/google).
 To switch to Google version of emoji, please follow the following steps:
 
 1. Copy `Runtime/Resources/backup~/EmojiGoogle.png` to `Runtime/Resources/images` folder.
-2. In the **Project** panel, find and select `EmojiGoogle` asset, and in the **Inspector** panel, change **Max Size** to 4096, and disable **Generate Mipmaps**.
+2. In the **Project** panel, find and select `EmojiGoogle` asset, and in the **Inspector** panel, change **Max Size** to 4096, disable **Generate Mipmaps**, and enable **Alpha Is Transparency**.
 3. In the `OnEnable()` function in your class overriding `UIWidgetsPanel`, add the following code
 
 ```csharp
@@ -296,7 +296,6 @@ EmojiUtils.configuration = new EmojiResourceConfiguration(
 </p>
 
 With the provided packaged stateful widget `UnityObjectDetector` and its `onRelease` callback function, you can easily drag some objects (for example GameObject from Hierarchy, files from Project Window, etc) into the area, get the UnityEngine.Object[] references and make further modification.
-
 
 ## Debug UIWidgets Application
 
