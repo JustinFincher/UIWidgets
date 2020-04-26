@@ -107,31 +107,26 @@ namespace Unity.UIWidgets.engine {
 
 #if UNITY_ANDROID
 
-                using (
-                    AndroidJavaClass viewController =
-                        new AndroidJavaClass("com.unity.uiwidgets.plugin.UIWidgetsViewController")
-                ) {
-                    AndroidJavaObject metrics = viewController.CallStatic<AndroidJavaObject>("getMetrics");
-                    float insets_bottom = metrics.Get<float>("insets_bottom");
-                    float insets_top = metrics.Get<float>("insets_top");
-                    float insets_left = metrics.Get<float>("insets_left");
-                    float insets_right = metrics.Get<float>("insets_right");
-                    float padding_bottom = metrics.Get<float>("padding_bottom");
-                    float padding_top = metrics.Get<float>("padding_top");
-                    float padding_left = metrics.Get<float>("padding_left");
-                    float padding_right = metrics.Get<float>("padding_right");
-
-                    this._viewMetrics = new viewMetrics {
+                using (AndroidJavaObject listenerInstance = new AndroidJavaClass("com.justzht.unity.lwp.LiveWallpaperListenerManager").CallStatic<AndroidJavaObject>("getInstance"))
+                {
+                    // AndroidJavaObject getRootWindowInsets = windowManagerInstance.Get<AndroidJavaObject>("getDecorView").Get<AndroidJavaObject>("getRootWindowInsets");
+                    float insets_top = listenerInstance.Get<int>("insetsTop");
+                    float insets_left = listenerInstance.Get<int>("insetsLeft");
+                    float insets_right = listenerInstance.Get<int>("insetsRight");
+                    float insets_bottom = listenerInstance.Get<int>("insetsBottom");
+                    this._viewMetrics = new viewMetrics
+                    {
                         insets_bottom = insets_bottom,
                         insets_left = insets_left,
                         insets_right = insets_right,
                         insets_top = insets_top,
-                        padding_left = padding_left,
-                        padding_top = padding_top,
-                        padding_right = padding_right,
-                        padding_bottom = padding_bottom
+                        padding_left = 0,
+                        padding_top = 0,
+                        padding_right = 0,
+                        padding_bottom = 0
                     };
                 }
+
 #elif UNITY_WEBGL
                 this._viewMetrics = new viewMetrics {
                     insets_bottom = 0,
@@ -164,20 +159,19 @@ namespace Unity.UIWidgets.engine {
 
 #if UNITY_ANDROID
         static float AndroidDevicePixelRatio() {
-            // using (
-            //     AndroidJavaClass unityPlayerClass = new AndroidJavaClass("com.unity3d.player.UnityPlayer")
-            // ) {
-            //     using (
-            //         AndroidJavaObject metricsInstance = new AndroidJavaObject("android.util.DisplayMetrics"),
-            //         activityInstance = unityPlayerClass.GetStatic<AndroidJavaObject>("currentActivity"),
-            //         windowManagerInstance = activityInstance.Call<AndroidJavaObject>("getWindowManager"),
-            //         displayInstance = windowManagerInstance.Call<AndroidJavaObject>("getDefaultDisplay")
-            //     ) {
-            //         displayInstance.Call("getMetrics", metricsInstance);
-            //         return metricsInstance.Get<float>("density");
-            //     }
-            // }
-            return 2.0f;
+            using (
+                AndroidJavaClass wallpaperManagerClass = new AndroidJavaClass("com.justzht.unity.lwp.LiveWallpaperManager")
+            ) {
+                using (
+                    AndroidJavaObject metricsInstance = new AndroidJavaObject("android.util.DisplayMetrics"),
+                    windowManagerInstance = wallpaperManagerClass.CallStatic<AndroidJavaObject>("getInstance").Call<AndroidJavaObject>("getWindowManager"),
+                    displayInstance = windowManagerInstance.Call<AndroidJavaObject>("getDefaultDisplay")
+                ) {
+                    displayInstance.Call("getMetrics", metricsInstance);
+                    return metricsInstance.Get<float>("density");
+                }
+            }
+            return 2.5f;
         }
 #endif
 
