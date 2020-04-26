@@ -89,6 +89,13 @@ namespace Unity.UIWidgets.engine {
             }
         }
 
+        public void InvokeChannel(string channel, string method) {
+            
+            MethodChannelMessageDelegate exists;
+            this._methodChannelMessageDelegates.TryGetValue(channel, out exists);
+            exists?.Invoke(method, new List<JSONNode>());
+        }
+
 #if UNITY_IOS || UNITY_WEBGL        
         [DllImport("__Internal")]
         static extern void UIWidgetsMessageSetObjectName(string objectName);
