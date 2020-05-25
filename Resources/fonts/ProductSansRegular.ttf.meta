@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 88aadcd46e08344f4b9d60ad85cca1a7
+guid: 2f5ffb1eb10eb4dc1abc7867fffde9ec
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,11 +8,11 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: SF Pro Text
+  fontName: Product Sans
   fontNames:
-  - SF Pro Text
+  - Product Sans
   fallbackFontReferences:
-  - {fileID: 12800000, guid: 3229e68e388b0492c9fe466e5f4bcef0, type: 3}
+  - {fileID: 12800000, guid: 32ee205a1d7b54e37984abe5bd7c0a0a, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1

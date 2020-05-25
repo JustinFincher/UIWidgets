@@ -109,7 +109,6 @@ namespace Unity.UIWidgets.engine {
 
                 using (AndroidJavaObject listenerInstance = new AndroidJavaClass("com.justzht.unity.lwp.LiveWallpaperListenerManager").CallStatic<AndroidJavaObject>("getInstance"))
                 {
-                    // AndroidJavaObject getRootWindowInsets = windowManagerInstance.Get<AndroidJavaObject>("getDecorView").Get<AndroidJavaObject>("getRootWindowInsets");
                     float insets_top = listenerInstance.Get<int>("insetsTop");
                     float insets_left = listenerInstance.Get<int>("insetsLeft");
                     float insets_right = listenerInstance.Get<int>("insetsRight");
@@ -120,10 +119,10 @@ namespace Unity.UIWidgets.engine {
                         insets_left = insets_left,
                         insets_right = insets_right,
                         insets_top = insets_top,
-                        padding_left = 0,
-                        padding_top = 0,
-                        padding_right = 0,
-                        padding_bottom = 0
+                        padding_left = insets_left,
+                        padding_top = insets_top,
+                        padding_right = insets_right,
+                        padding_bottom = insets_bottom
                     };
                 }
 

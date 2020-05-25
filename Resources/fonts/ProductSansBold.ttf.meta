@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 972403b703998429986576a840246ec2
+guid: 32ee205a1d7b54e37984abe5bd7c0a0a
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,9 +8,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: GalleryIcons
+  fontName: Product Sans
   fontNames:
-  - GalleryIcons
+  - Product Sans
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
