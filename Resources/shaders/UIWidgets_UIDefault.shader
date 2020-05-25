@@ -106,6 +106,14 @@ Shader "UIWidgets/UIDefault"
                 clip (color.a - 0.001);
                 #endif
 
+// -------- ADD THIS BEGIN --------
+                if (!IsGammaSpace())
+                {
+                    color.rgb = GammaToLinearSpace(color.rgb);
+                }
+// -------- ADD THIS END --------
+// IsGammaSpace and GammaToLinearSpace is confirmed working on 2019.1.1
+
                 return color;
             }
         ENDCG
