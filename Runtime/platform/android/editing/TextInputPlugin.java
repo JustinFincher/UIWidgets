@@ -21,6 +21,8 @@ import com.unity3d.player.UnityPlayer;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.unity.uiwidgets.plugin.editing.*;
+
 import static com.unity.uiwidgets.plugin.Utils.TAG;
 
 public class TextInputPlugin {
@@ -40,9 +42,9 @@ public class TextInputPlugin {
     }
 
     public TextInputPlugin() {
-         mView = new TextInputView(LiveWallpaperManager.getInstance().unityPlayer);
+         mView = new TextInputView(com.justzht.unity.lwp.LiveWallpaperManager.getInstance().getContext());
          mView.requestFocus();
-         LiveWallpaperManager.getInstance().unityPlayer.addView(mView, 1, 1);
+         com.justzht.unity.lwp.LiveWallpaperManager.getInstance().unityPlayer.addView(mView, 1, 1);
          mImm = (InputMethodManager) mView.getContext().getSystemService(
                  Context.INPUT_METHOD_SERVICE);
     }
