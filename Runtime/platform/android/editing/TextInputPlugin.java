@@ -24,8 +24,8 @@ import org.json.JSONObject;
 import static com.unity.uiwidgets.plugin.Utils.TAG;
 
 public class TextInputPlugin {
-//     private final TextInputView mView;
-//     private final InputMethodManager mImm;
+     private final TextInputView mView;
+     private final InputMethodManager mImm;
     private int mClient = 0;
     private JSONObject mConfiguration;
     private Editable mEditable;
@@ -40,76 +40,73 @@ public class TextInputPlugin {
     }
 
     public TextInputPlugin() {
-//         ViewGroup contentView = (ViewGroup)UnityPlayer.currentActivity.findViewById(android.R.id.content);
-//         mView = new TextInputView(UnityPlayer.currentActivity);
-//         mView.requestFocus();
-//         contentView.addView(mView, 1, 1);
-//         mImm = (InputMethodManager) mView.getContext().getSystemService(
-//                 Context.INPUT_METHOD_SERVICE);
+         mView = new TextInputView(LiveWallpaperManager.getInstance().unityPlayer);
+         mView.requestFocus();
+         LiveWallpaperManager.getInstance().unityPlayer.addView(mView, 1, 1);
+         mImm = (InputMethodManager) mView.getContext().getSystemService(
+                 Context.INPUT_METHOD_SERVICE);
     }
 
     public static void show() {
-//         UnityPlayer.currentActivity.runOnUiThread(new Runnable() {
-//             @Override
-//             public void run() {
-//                 TextInputPlugin plugin = getInstance();
-//                 plugin.showTextInput(plugin.mView);
-//             }
-//         });
+         new android.os.Handler(android.os.Looper.getMainLooper()).post(new Runnable() {
+                     @Override
+                     public void run() {
+                         TextInputPlugin plugin = getInstance();
+                         plugin.showTextInput(plugin.mView);
+                     }
+                 });
     }
 
 
     public static void hide() {
-//         UnityPlayer.currentActivity.runOnUiThread(new Runnable() {
-//             @Override
-//             public void run() {
-//                 TextInputPlugin plugin = getInstance();
-//                 plugin.hideTextInput(plugin.mView);
-//             }
-//         });
+        new android.os.Handler(android.os.Looper.getMainLooper()).post(new Runnable() {
+                             @Override
+                             public void run() {
+                                 TextInputPlugin plugin = getInstance();
+                                                  plugin.hideTextInput(plugin.mView);
+                             }
+                         });
     }
 
     public static void setClient(int client, String configurationJson) {
-//         UnityPlayer.currentActivity.runOnUiThread(new Runnable() {
-//             @Override
-//             public void run() {
-//                 try {
-//                     JSONObject configuration = new JSONObject(configurationJson);
-//                     TextInputPlugin plugin = getInstance();
-//                     plugin.setTextInputClient(plugin.mView, client, configuration);
-//                 } catch (JSONException e) {
-//                     Log.e(TAG, "error parse json", e);
-//                 }
-//             }
-//         });
+         new android.os.Handler(android.os.Looper.getMainLooper()).post(new Runnable() {
+             @Override
+             public void run() {
+                 try {
+                     JSONObject configuration = new JSONObject(configurationJson);
+                     TextInputPlugin plugin = getInstance();
+                     plugin.setTextInputClient(plugin.mView, client, configuration);
+                 } catch (JSONException e) {
+                     Log.e(TAG, "error parse json", e);
+                 }
+             }
+         });
 
     }
 
     public static void setEditingState(String stateJson) {
-
-//         UnityPlayer.currentActivity.runOnUiThread(new Runnable() {
-//             @Override
-//             public void run() {
-//                 try {
-//                     TextInputPlugin plugin = getInstance();
-//                     JSONObject state = new JSONObject(stateJson);
-//                     plugin.setTextInputEditingState(plugin.mView, state);
-//                 } catch (JSONException e) {
-//                     Log.e(TAG, "error parse json", e);
-//                 }
-//             }
-//         });
+        new android.os.Handler(android.os.Looper.getMainLooper()).post(new Runnable() {
+             @Override
+             public void run() {
+                 try {
+                     TextInputPlugin plugin = getInstance();
+                     JSONObject state = new JSONObject(stateJson);
+                     plugin.setTextInputEditingState(plugin.mView, state);
+                 } catch (JSONException e) {
+                     Log.e(TAG, "error parse json", e);
+                 }
+             }
+         });
     }
 
     public static void clearClient() {
-
-//         UnityPlayer.currentActivity.runOnUiThread(new Runnable() {
-//             @Override
-//             public void run() {
-//                 TextInputPlugin plugin = getInstance();
-//                 plugin.clearTextInputClient();
-//             }
-//         });
+        new android.os.Handler(android.os.Looper.getMainLooper()).post(new Runnable() {
+             @Override
+             public void run() {
+                 TextInputPlugin plugin = getInstance();
+                 plugin.clearTextInputClient();
+             }
+         });
     }
 
     private static int inputTypeFromTextInputType(JSONObject type, boolean obscureText,
@@ -209,11 +206,11 @@ public class TextInputPlugin {
 
     private void showTextInput(View view) {
         view.requestFocus();
-//         mImm.showSoftInput(view, 0);
+         mImm.showSoftInput(view, 0);
     }
 
     private void hideTextInput(View view) {
-//         mImm.hideSoftInputFromWindow(view.getApplicationWindowToken(), 0);
+         mImm.hideSoftInputFromWindow(view.getApplicationWindowToken(), 0);
     }
 
     private void setTextInputClient(View view, int client, JSONObject configuration) {
@@ -238,18 +235,18 @@ public class TextInputPlugin {
     }
 
     private void setTextInputEditingState(View view, JSONObject state) throws JSONException {
-//         if (!mRestartInputPending && state.getString("text").equals(mEditable.toString())) {
-//             applyStateToSelection(state);
-//             mImm.updateSelection(mView, Math.max(Selection.getSelectionStart(mEditable), 0),
-//                     Math.max(Selection.getSelectionEnd(mEditable), 0),
-//                     BaseInputConnection.getComposingSpanStart(mEditable),
-//                     BaseInputConnection.getComposingSpanEnd(mEditable));
-//         } else {
-//             mEditable.replace(0, mEditable.length(), state.getString("text"));
-//             applyStateToSelection(state);
-//             mImm.restartInput(view);
-//             mRestartInputPending = false;
-//         }
+         if (!mRestartInputPending && state.getString("text").equals(mEditable.toString())) {
+             applyStateToSelection(state);
+             mImm.updateSelection(mView, Math.max(Selection.getSelectionStart(mEditable), 0),
+                     Math.max(Selection.getSelectionEnd(mEditable), 0),
+                     BaseInputConnection.getComposingSpanStart(mEditable),
+                     BaseInputConnection.getComposingSpanEnd(mEditable));
+         } else {
+             mEditable.replace(0, mEditable.length(), state.getString("text"));
+             applyStateToSelection(state);
+             mImm.restartInput(view);
+             mRestartInputPending = false;
+         }
     }
 
     private void clearTextInputClient() {
